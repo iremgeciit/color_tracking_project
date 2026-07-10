@@ -13,14 +13,14 @@ Bu proje, Python ve OpenCV kullanarak belirli bir renkteki (örneğin mavi) nesn
 pip install -r requirements.txt
 ```
 
-##🎯Bu Proje Tam Olarak Neyi Amaçlıyor? 
+##🎯 Bu Proje Tam Olarak Neyi Amaçlıyor? 
 "Bilgisayara karmaşık, renkli ve gürültülü bir dünyadan, sadece ilgilendiği nesneyi ayıklamayı öğretmektir."
 İnsan gözü odaya baktığında masayı, duvarı, senin yüzünü ve elindeki mavi kalemi saniyede ayırt eder. Bilgisayar ise sadece milyonlarca sayı dizisi (piksel) görür. Bu proje bilgisayara şu 3 komutu verir:
 1."Dünyayı basitleştir:" Parlaklık ve gölge değişimlerinden etkilenmemek için görüntüyü renk uzayına (HSV) çevir.
 2."Gözünü sadece hedefe dik:" Seçtiğin renk dışındaki tüm dünyayı (duvarları, insanları) simsiyah yap; hedef nesneyi ise bembeyaz bir silüet olarak bırak (Maskeleme).
 3."Koordinatları yakala:" O beyaz silüetin tam matematiksel orta noktasını ($X, Y$ koordinatı olarak) hesapla ve o koordinata bir hedef çizgisi çiz.
 
-## İşlemlerin Mantığı
+##⚙️ İşlemlerin Mantığı
 [1. Kameradan Kare Al] ➔ [2. BGR'dan HSV'ye Çevir] ➔ [3. Renk Maskesi Uygula] ➔ [4. Morfolojik Temizlik] ➔ [5. Kontur & Moment bul] ➔ [6. Ekrana Çiz]
 
 ##Neden BGR değil de HSV?
