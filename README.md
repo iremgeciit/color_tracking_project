@@ -1,45 +1,96 @@
-# Canlı Kamera Üzerinden Renk Tabanlı Nesne Takibi
+# 🎯 Canlı Kamera Üzerinden Renk Tabanlı Nesne Takibi
 
-Bu proje, Python ve OpenCV kullanarak belirli bir renkteki (örneğin mavi) nesneleri canlı kamera görüntüsü veya statik resimler üzerinden gerçek zamanlı olarak takip etmeyi amaçlar.
+Bu proje, **Python** ve **OpenCV** kullanarak belirli bir renkteki (örneğin mavi) nesneleri canlı kamera görüntüsü veya statik resimler üzerinden gerçek zamanlı olarak takip etmeyi amaçlar.
+
+---
 
 ## 🚀 Kullanılan Teknolojiler & Teknikler
-* **HSV Renk Uzayı:** Işık değişimlerinden etkilenmeden renk tespiti.
-* **Maskeleme (Thresholding):** Hedef rengi arka plandan ayırma.
-* **Morfolojik İşlemler:** Görüntüdeki gürültüleri (lekeleri) temizleme.
-* **Görüntü Momentleri:** Nesnenin kütle merkezini ($X, Y$) hesaplama.
+
+- **HSV Renk Uzayı:** Işık değişimlerinden etkilenmeden renk tespiti.
+- **Maskeleme (Thresholding):** Hedef rengi arka plandan ayırma.
+- **Morfolojik İşlemler:** Görüntüdeki küçük gürültüleri temizleme.
+- **Görüntü Momentleri:** Nesnenin kütle merkezini (X, Y) hesaplama.
+
+---
 
 ## 🛠️ Kurulum
+
 ```bash
 pip install -r requirements.txt
 ```
 
-##🎯 Bu Proje Tam Olarak Neyi Amaçlıyor? 
-"Bilgisayara karmaşık, renkli ve gürültülü bir dünyadan, sadece ilgilendiği nesneyi ayıklamayı öğretmektir."
-İnsan gözü odaya baktığında masayı, duvarı, senin yüzünü ve elindeki mavi kalemi saniyede ayırt eder. Bilgisayar ise sadece milyonlarca sayı dizisi (piksel) görür. Bu proje bilgisayara şu 3 komutu verir:
-1."Dünyayı basitleştir:" Parlaklık ve gölge değişimlerinden etkilenmemek için görüntüyü renk uzayına (HSV) çevir.
-2."Gözünü sadece hedefe dik:" Seçtiğin renk dışındaki tüm dünyayı (duvarları, insanları) simsiyah yap; hedef nesneyi ise bembeyaz bir silüet olarak bırak (Maskeleme).
-3."Koordinatları yakala:" O beyaz silüetin tam matematiksel orta noktasını ($X, Y$ koordinatı olarak) hesapla ve o koordinata bir hedef çizgisi çiz.
+---
 
-##⚙️ İşlemlerin Mantığı
-[1. Kameradan Kare Al] ➔ [2. BGR'dan HSV'ye Çevir] ➔ [3. Renk Maskesi Uygula] ➔ [4. Morfolojik Temizlik] ➔ [5. Kontur & Moment bul] ➔ [6. Ekrana Çiz]
+## 🎯 Bu Proje Tam Olarak Neyi Amaçlıyor?
 
-##Neden BGR değil de HSV?
-Normalde OpenCV resimleri BGR (Blue, Green, Red) olarak okur. Ancak gerçek hayatta odanın ışığı biraz değiştiğinde, sarı bir objenin BGR değerleri tamamen altüst olur. Bilgisayar onu tanıyamaz hale gelir.
+> **Bilgisayara karmaşık, renkli ve gürültülü bir dünyadan yalnızca ilgilendiği nesneyi ayıklamayı öğretmektir.**
 
-HSV (Hue, Saturation, Value): Rengi ışık gücünden ayırır.
-Hue (Öz): Rengin kendisidir (Kırmızı, Mavi, Sarı vb.). Işık azalsa da artsa da bu değer neredeyse sabit kalır.
-Saturation (Doygunluk): Rengin ne kadar canlı veya soluk olduğudur.
-Value (Parlaklık): Işığın miktarıdır.
+İnsan gözü odaya baktığında masayı, duvarı, yüzleri ve elindeki mavi kalemi saniyeler içinde ayırt eder. Bilgisayar ise yalnızca milyonlarca piksel görür.
 
-Yaptığım İşlem:
-Resmi HSV'ye çevirip "Bana sadece şu Hue (renk) aralığındaki pikselleri getir, ışığı önemli değil" diyeceğiz.
+Bu projede bilgisayara şu üç temel komut öğretilir:
 
-### 1. Uzaktan Takip ve Alan Algılama Mantığı
-Nesne uzaktayken ve ekranda daha büyük başka bir mavi alan (örneğin arkadaki pano) varken, sistem en büyük alana kilitlenir:
+1. **Dünyayı Basitleştir**
+   - Görüntüyü HSV renk uzayına çevir.
+   - Işık değişimlerinden etkilenme.
+
+2. **Sadece Hedefe Odaklan**
+   - Seçilen renk dışındaki tüm pikselleri siyah yap.
+   - Hedef nesneyi beyaz olarak bırak.
+
+3. **Merkezi Bul**
+   - Nesnenin merkez koordinatını (X, Y) hesapla.
+   - Bu noktaya hedef işareti çiz.
+
+---
+
+## ⚙️ İşlem Akışı
+
+```
+Kameradan Kare Al
+        ↓
+BGR → HSV Dönüşümü
+        ↓
+Renk Maskesi Oluştur
+        ↓
+Morfolojik Temizlik
+        ↓
+Kontur Bul
+        ↓
+Moment Hesapla
+        ↓
+Merkez Noktasını Çiz
+```
+
+---
+
+## ❓ Neden BGR Değil de HSV?
+
+OpenCV görüntüleri varsayılan olarak **BGR (Blue, Green, Red)** formatında okur.
+
+Ancak gerçek hayatta ışık şiddeti değiştikçe aynı nesnenin BGR değerleri de önemli ölçüde değişebilir. Bu durum renk tabanlı tespiti zorlaştırır.
+
+HSV renk uzayı ise rengi parlaklıktan ayırır.
+
+- **Hue (H):** Gerçek renk bilgisi
+- **Saturation (S):** Rengin doygunluğu
+- **Value (V):** Parlaklık
+
+Bu sayede sistem farklı ışık koşullarında bile aynı rengi daha güvenilir şekilde algılar.
+
+---
+
+## 📷 Sonuçlar
+
+### 1️⃣ Uzaktan Takip
+
+Nesne uzaktayken ve görüntüde daha büyük başka bir mavi alan bulunduğunda sistem en büyük alana odaklanır.
 
 ![Uzaktan Takip](outputs/uzak_takip.png)
 
-### 2. Yakından Takip ve Hedefe Kilitlenme
-Mavi nesne kameraya yaklaştırılıp ekrandaki en büyük alan haline geldiğinde, bilgisayar anında hedefi günceller ve nesnenin merkezine kilitlenir:
+---
+
+### 2️⃣ Yakından Takip
+
+Mavi nesne kameraya yaklaştırıldığında sistem yeni en büyük alanı hedef olarak seçer ve merkezini takip eder.
 
 ![Yakından Takip](outputs/yakin_takip.png)
