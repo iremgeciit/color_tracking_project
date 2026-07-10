@@ -11,8 +11,9 @@ Bu proje, Python ve OpenCV kullanarak belirli bir renkteki (örneğin mavi) nesn
 ## 🛠️ Kurulum
 ```bash
 pip install -r requirements.txt
+```
 
-##Bu Proje Tam Olarak Neyi Amaçlıyor? 
+##🎯Bu Proje Tam Olarak Neyi Amaçlıyor? 
 "Bilgisayara karmaşık, renkli ve gürültülü bir dünyadan, sadece ilgilendiği nesneyi ayıklamayı öğretmektir."
 İnsan gözü odaya baktığında masayı, duvarı, senin yüzünü ve elindeki mavi kalemi saniyede ayırt eder. Bilgisayar ise sadece milyonlarca sayı dizisi (piksel) görür. Bu proje bilgisayara şu 3 komutu verir:
 1."Dünyayı basitleştir:" Parlaklık ve gölge değişimlerinden etkilenmemek için görüntüyü renk uzayına (HSV) çevir.
