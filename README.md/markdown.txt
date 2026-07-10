@@ -35,9 +35,9 @@ Bizim Yapacağımız İşlem: Resmi HSV'ye çevirip "Bana sadece şu Hue (renk) 
 ### 1. Uzaktan Takip ve Alan Algılama Mantığı
 Nesne uzaktayken ve ekranda daha büyük başka bir mavi alan (örneğin arkadaki pano) varken, sistem en büyük alana kilitlenir:
 
-![Uzaktan Takip](outputs/uzak_takip.jpg)
+![Uzaktan Takip](outputs/uzak_takip.png)
 
 ### 2. Yakından Takip ve Hedefe Kilitlenme
 Mavi nesne kameraya yaklaştırılıp ekrandaki en büyük alan haline geldiğinde, bilgisayar anında hedefi günceller ve nesnenin merkezine kilitlenir:
 
-![Yakından Takip](outputs/yakin_takip.jpg)
+![Yakından Takip](outputs/yakin_takip.png)
